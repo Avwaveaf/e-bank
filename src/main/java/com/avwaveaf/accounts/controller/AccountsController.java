@@ -1,6 +1,6 @@
 package com.avwaveaf.accounts.controller;
 
-import com.avwaveaf.accounts.constants.AccountConstants;
+import com.avwaveaf.accounts.constants.NetConst;
 import com.avwaveaf.accounts.dto.CustomerDTO;
 import com.avwaveaf.accounts.dto.ResponseDTO;
 import com.avwaveaf.accounts.helper.OpsResHelper;
@@ -29,7 +29,7 @@ public class AccountsController {
         accountService.createAccount(customerDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new ResponseDTO(AccountConstants.S_CREATED, AccountConstants.M_CREATED));
+                .body(new ResponseDTO(NetConst.S_CREATED, NetConst.M_CREATED));
     }
 
     @GetMapping("/fetch")

@@ -15,7 +15,6 @@ import com.avwaveaf.accounts.service.IAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -39,9 +38,6 @@ public class AccountServiceImpl implements IAccountService {
 
         if (eCustomer.isPresent())
             throw new CustomerAlreadyExists("Customer Already Registered for this Moblile Number");
-
-        customer.setCreatedAt(LocalDateTime.now());
-        customer.setCreatedBy("Guest");
 
         Customer sCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(sCustomer));
@@ -124,16 +120,13 @@ public class AccountServiceImpl implements IAccountService {
      * @return Accounts [NEW - Object]
      */
     private Accounts createNewAccount(Customer customer) {
-        Accounts accounts = Accounts.builder()
+
+        return Accounts.builder()
                 .customerId(customer.getCustomerId())
                 .accountNumber(1000000000L + new Random().nextInt(900000000))
                 .accountType(AccountConstants.SAVINGS)
                 .branchAddress(AccountConstants.ADDRESS)
                 .build();
-        accounts.setCreatedAt(LocalDateTime.now());
-        accounts.setCreatedBy("Guest");
-
-        return accounts;
     }
 
 }

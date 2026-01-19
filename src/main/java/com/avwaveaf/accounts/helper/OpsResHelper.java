@@ -1,6 +1,6 @@
 package com.avwaveaf.accounts.helper;
 
-import com.avwaveaf.accounts.constants.AccountConstants;
+import com.avwaveaf.accounts.constants.NetConst;
 import com.avwaveaf.accounts.dto.ResponseDTO;
 import org.springframework.http.ResponseEntity;
 
@@ -11,8 +11,8 @@ public class OpsResHelper {
                     .ok()
                     .body(
                             new ResponseDTO(
-                                    AccountConstants.S_REQ_SUCCESS,
-                                    AccountConstants.M_REQ_SUCCESS
+                                    NetConst.S_REQ_SUCCESS,
+                                    NetConst.M_REQ_SUCCESS
                             )
                     );
         } else {
@@ -20,8 +20,8 @@ public class OpsResHelper {
                     .internalServerError()
                     .body(
                             new ResponseDTO(
-                                    AccountConstants.S_INT_ERR,
-                                    AccountConstants.M_INT_ERR
+                                    NetConst.S_INT_ERR,
+                                    NetConst.M_INT_ERR
                             )
                     );
         }
