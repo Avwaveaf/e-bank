@@ -6,15 +6,18 @@ import com.avwaveaf.accounts.dto.ResponseDTO;
 import com.avwaveaf.accounts.helper.OpsResHelper;
 import com.avwaveaf.accounts.service.IAccountService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
+@Validated
 public class AccountsController {
 
     private IAccountService accountService;
@@ -31,14 +34,15 @@ public class AccountsController {
 
     @GetMapping("/fetch")
     public ResponseEntity<CustomerDTO> getAccountsDetail(
-            @RequestParam String mobileNumber
-    ){
+            @RequestParam
+            @Digits(fraction = 0, integer = 12, message = "Invalid Phone Number")
+            String mobileNumber
+    ) {
         CustomerDTO customerDTO = accountService.getAccountDetail(mobileNumber);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(customerDTO);
     }
-
 
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateAccountsDetail(
@@ -50,8 +54,10 @@ public class AccountsController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseDTO> deleteAccounts(
-            @RequestParam(name = "mobileNumber") String phoneNumber
-    ){
+            @RequestParam(name = "mobileNumber")
+            @Digits(fraction = 0, integer = 12, message = "Invalid Phone Number")
+            String phoneNumber
+    ) {
         boolean isDeleted = accountService.deleteAccount(phoneNumber);
         return OpsResHelper.handleOperations(isDeleted);
     }
