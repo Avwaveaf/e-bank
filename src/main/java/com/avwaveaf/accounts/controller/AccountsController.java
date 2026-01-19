@@ -5,6 +5,7 @@ import com.avwaveaf.accounts.dto.CustomerDTO;
 import com.avwaveaf.accounts.dto.ResponseDTO;
 import com.avwaveaf.accounts.helper.OpsResHelper;
 import com.avwaveaf.accounts.service.IAccountService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +21,7 @@ public class AccountsController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> createAccount(
-            @RequestBody CustomerDTO customerDTO
+            @RequestBody @Valid CustomerDTO customerDTO
     ) {
         accountService.createAccount(customerDTO);
         return ResponseEntity
@@ -41,7 +42,7 @@ public class AccountsController {
 
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateAccountsDetail(
-            @RequestBody CustomerDTO customerDTO
+            @RequestBody @Valid CustomerDTO customerDTO
     ) {
         boolean isUpdated = accountService.updateAccount(customerDTO);
         return OpsResHelper.handleOperations(isUpdated);
