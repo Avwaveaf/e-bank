@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class AccountsController {
 
