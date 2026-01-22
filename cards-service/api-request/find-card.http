@@ -1,0 +1,3 @@
+### GET request to cards
+GET http://localhost:8081/api/v1/cards?mobileNumber=123456789112
+###

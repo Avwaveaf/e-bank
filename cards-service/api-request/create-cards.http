@@ -1,0 +1,3 @@
+### POST request to create new cards
+POST http://localhost:8081/api/v1/cards?mobileNumber=123456789112
+###
